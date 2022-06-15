@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
 import com.example.android.pnt.cloneinstagram.databinding.ActivitySplashBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -31,10 +32,12 @@ public class SplashActivity extends AppCompatActivity {
 
         binding.login.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
         });
         
         binding.register.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), RegisterActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
         });
     }
 
@@ -55,6 +58,17 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void onAnimationRepeat(Animation animation) {
 
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class).
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
         }
     }
 }

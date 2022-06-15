@@ -1,8 +1,10 @@
 package com.example.android.pnt.cloneinstagram;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,10 +12,12 @@ import android.widget.Toast;
 
 import com.example.android.pnt.cloneinstagram.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -21,6 +25,8 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
     ActivityRegisterBinding binding;
+    ProgressDialog progressDialog;
+
     private DatabaseReference mRootRef;
     private FirebaseAuth mAuth;
 
@@ -36,8 +42,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mRootRef = FirebaseDatabase.getInstance().getReference();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mRootRef = database.getReference("Users");
+
         mAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
     }
 
     private void setListener() {
@@ -65,22 +74,34 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(String userName, String name, String email, String password) {
+        progressDialog.show();
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
                 HashMap<String, Object> map = new HashMap<>();
+
                 map.put("Name", name);
                 map.put("Email", email);
                 map.put("UserName", userName);
                 map.put("Id", mAuth.getCurrentUser().getUid());
 
-                mRootRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                mRootRef.child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Update the profile for better experience", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+
                             startActivity(new Intent(getApplicationContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            finish();
                         }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
