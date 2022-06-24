@@ -3,6 +3,7 @@ package com.example.android.pnt.whatsapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -45,41 +46,43 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void setListener() {
-        binding.btnSignIn.setOnClickListener(v -> {
-            String strEmail = binding.edtEmail.getText().toString().trim();
-            String strUserName = binding.edtUsername.getText().toString().trim();
-            String strPass = binding.edtPass.getText().toString().trim();
-            String strRePass = binding.edtRePass.getText().toString().trim();
+        binding.btnSignIn.setOnClickListener(v -> signUp());
 
-            if(!strEmail.isEmpty() && !strUserName.isEmpty() && !strPass.isEmpty() && !strRePass.isEmpty()) {
-                binding.progressBar.setVisibility(View.VISIBLE);
-
-                auth.createUserWithEmailAndPassword(strEmail, strPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            binding.progressBar.setVisibility(View.GONE);
-
-                            Users users = new Users(strUserName, strEmail, strPass);
-                            String id = task.getResult().getUser().getUid();
-
-                            database.getReference().child("Users").child(id).setValue(users);
-
-                            showToast("Sign Up Success");
-                        } else {
-                            binding.progressBar.setVisibility(View.GONE);
-
-                            showToast(task.getException().toString());
-                        }
-                    }
-                });
-            } else {
-                showToast("Enter Credentials");
-            }
-        });
+        binding.textView.setOnClickListener(v -> startActivity(new Intent(SignUpActivity.this, SignInActivity.class)));
     }
 
     private void signUp() {
+        String strEmail = binding.edtEmail.getText().toString().trim();
+        String strUserName = binding.edtUsername.getText().toString().trim();
+        String strPass = binding.edtPass.getText().toString().trim();
+        String strRePass = binding.edtRePass.getText().toString().trim();
 
+        if(!strEmail.isEmpty() && !strUserName.isEmpty() && !strPass.isEmpty() && !strRePass.isEmpty()) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+
+            auth.createUserWithEmailAndPassword(strEmail, strPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()) {
+                        binding.progressBar.setVisibility(View.GONE);
+
+                        Users users = new Users(strUserName, strEmail, strPass);
+                        String id = task.getResult().getUser().getUid();
+
+                        database.getReference().child("Users").child(id).setValue(users);
+
+                        showToast("Sign Up Success");
+
+                        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                    } else {
+                        binding.progressBar.setVisibility(View.GONE);
+
+                        showToast(task.getException().toString());
+                    }
+                }
+            });
+        } else {
+            showToast("Enter Credentials");
+        }
     }
 }

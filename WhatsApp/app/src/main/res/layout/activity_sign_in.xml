@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your email"
+                android:textColor="@color/white"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -70,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your password"
+                android:textColor="@color/white"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 tools:ignore="TouchTargetSizeCheck" />
