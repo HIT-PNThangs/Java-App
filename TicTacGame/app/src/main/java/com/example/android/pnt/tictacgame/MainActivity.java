@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     private int grid_size;
     TableLayout gameBoard;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         gameBoard = (TableLayout) findViewById(R.id.mainBoard);
         txt_turn = (TextView) findViewById(R.id.turn);
 
+        Random random = new Random();
+        turn = random.nextInt() % 2 == 1 ? 'O' : 'X';
         resetBoard();
         txt_turn.setText("Turn: " + turn);
 
@@ -37,24 +41,21 @@ public class MainActivity extends AppCompatActivity {
 
             for (int j = 0; j < row.getChildCount(); j++) {
                 TextView tv = (TextView) row.getChildAt(j);
-                tv.setText(R.string.none);
+                tv.setText(' ');
                 tv.setOnClickListener(Move(i, j, tv));
             }
         }
 
         Button reset_btn = (Button) findViewById(R.id.reset);
-        reset_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        reset_btn.setOnClickListener(v -> {
                 Intent current = getIntent();
                 finish();
                 startActivity(current);
-            }
+                overridePendingTransition(0, 0);
         });
     }
 
     protected void resetBoard() {
-        turn = 'X';
         for (int i = 0; i < grid_size; i++) {
             for (int j = 0; j < grid_size; j++) my_board[i][j] = ' ';
         }
