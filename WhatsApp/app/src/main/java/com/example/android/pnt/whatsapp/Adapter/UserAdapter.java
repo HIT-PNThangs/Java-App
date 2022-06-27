@@ -11,10 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.pnt.whatsapp.Fragment.ChatsFragment;
 import com.example.android.pnt.whatsapp.Model.Users;
 import com.example.android.pnt.whatsapp.R;
-import com.example.android.pnt.whatsapp.activity.ChatDetailActivity;
+import com.example.android.pnt.whatsapp.Activity.ChatDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

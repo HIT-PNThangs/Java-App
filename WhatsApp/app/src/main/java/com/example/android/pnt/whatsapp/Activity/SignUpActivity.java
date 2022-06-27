@@ -1,4 +1,4 @@
-package com.example.android.pnt.whatsapp.activity;
+package com.example.android.pnt.whatsapp.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.pnt.whatsapp.Model.Users;
-import com.example.android.pnt.whatsapp.R;
-import com.example.android.pnt.whatsapp.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

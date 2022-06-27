@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsApp">
         <activity
-            android:name=".activity.ChatDetailActivity"
+            android:name=".Activity.ChatDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SignUpActivity"
+            android:name=".Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SignInActivity"
+            android:name=".Activity.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
