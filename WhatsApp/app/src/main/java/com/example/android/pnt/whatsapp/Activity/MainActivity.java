@@ -26,20 +26,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        init();
-
-        setListener();
-    }
-
-    private void init() {
         auth = FirebaseAuth.getInstance();
 
         binding.viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         binding.tabLayout.setupWithViewPager(binding.viewPager);
-    }
-
-    private void setListener() {
-
     }
 
     @Override
@@ -54,9 +44,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
 
             case R.id.groupChat:
+                startActivity(new Intent(MainActivity.this, GroupChatActivity.class));
                 break;
 
             case R.id.logOut:
@@ -65,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

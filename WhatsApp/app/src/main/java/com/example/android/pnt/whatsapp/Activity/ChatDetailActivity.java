@@ -1,8 +1,10 @@
 package com.example.android.pnt.whatsapp.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -12,7 +14,10 @@ import com.example.android.pnt.whatsapp.R;
 import com.example.android.pnt.whatsapp.databinding.ActivityChatDetailBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,6 +32,8 @@ public class ChatDetailActivity extends AppCompatActivity {
     String senderId;
     String senderRoom;
     String receiverRoom;
+    List<MessageModel> messageModels;
+    ChatAdapter chatAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +48,20 @@ public class ChatDetailActivity extends AppCompatActivity {
 
     private void init() {
         getSupportActionBar().hide();
+
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        final String senderId = auth.getUid();
+        String senderId = auth.getUid();
         String receiveId = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
 
         binding.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.avatar).into(binding.profileImage);
-        final List<MessageModel> messageModels = new ArrayList<>();
-        final ChatAdapter chatAdapter = new ChatAdapter(messageModels, this, receiveId);
+
+        messageModels = new ArrayList<>();
+        chatAdapter = new ChatAdapter(messageModels, this, receiveId);
 
         binding.chatRecyclerView.setAdapter(chatAdapter);
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -64,8 +73,34 @@ public class ChatDetailActivity extends AppCompatActivity {
 
     private void setListener() {
         binding.back.setOnClickListener(v -> {
-
+            finish();
         });
+
+        database.getReference().child("Chats")
+                .child(senderRoom)
+                .addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        messageModels.clear();
+                        for(DataSnapshot item : snapshot.getChildren()) {
+                            MessageModel model = item.getValue(MessageModel.class);
+
+                            if(model != null) {
+                                model.setMessage(item.getKey());
+                                messageModels.add(model);
+                            }
+                        }
+
+                        chatAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
         binding.send.setOnClickListener(v -> {
             String message = binding.enterMessage.getText().toString();
@@ -77,7 +112,11 @@ public class ChatDetailActivity extends AppCompatActivity {
                     .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-
+                            database.getReference()
+                                    .child("Chats")
+                                    .child(receiverRoom)
+                                    .push()
+                                    .setValue(model);
                         }
                     });
         });

@@ -9,14 +9,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.pnt.whatsapp.Model.Users;
+import com.example.android.pnt.whatsapp.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignUpActivity extends AppCompatActivity {
+import java.util.Objects;
 
+public class SignUpActivity extends AppCompatActivity {
     ActivitySignUpBinding binding;
     FirebaseAuth auth;
     FirebaseDatabase database;
@@ -50,10 +52,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void signUp() {
-        String strEmail = binding.edtEmail.getText().toString().trim();
-        String strUserName = binding.edtUsername.getText().toString().trim();
-        String strPass = binding.edtPass.getText().toString().trim();
-        String strRePass = binding.edtRePass.getText().toString().trim();
+        String strEmail = Objects.requireNonNull(binding.edtEmail.getText()).toString().trim();
+        String strUserName = Objects.requireNonNull(binding.edtUsername.getText()).toString().trim();
+        String strPass = Objects.requireNonNull(binding.edtPass.getText()).toString().trim();
+        String strRePass = Objects.requireNonNull(binding.edtRePass.getText()).toString().trim();
 
         if(!strEmail.isEmpty() && !strUserName.isEmpty() && !strPass.isEmpty() && !strRePass.isEmpty()) {
             binding.progressBar.setVisibility(View.VISIBLE);
@@ -65,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
                         binding.progressBar.setVisibility(View.GONE);
 
                         Users users = new Users(strUserName, strEmail, strPass);
-                        String id = task.getResult().getUser().getUid();
+                        String id = Objects.requireNonNull(task.getResult().getUser()).getUid();
 
                         database.getReference().child("Users").child(id).setValue(users);
 
@@ -75,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
                     } else {
                         binding.progressBar.setVisibility(View.GONE);
 
-                        showToast(task.getException().toString());
+                        showToast(Objects.requireNonNull(task.getException()).toString());
                     }
                 }
             });

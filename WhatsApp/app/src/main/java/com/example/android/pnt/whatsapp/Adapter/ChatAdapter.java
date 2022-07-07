@@ -1,7 +1,9 @@
 package com.example.android.pnt.whatsapp.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.pnt.whatsapp.Model.MessageModel;
 import com.example.android.pnt.whatsapp.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter {
@@ -63,12 +68,51 @@ public class ChatAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MessageModel messageModel = messageModels.get(position);
 
+        holder.itemView.setOnLongClickListener(view -> {
+            new AlertDialog.Builder(context)
+                    .setTitle("Delete")
+                    .setMessage("Are you sure want to delete this message?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            String senderRoom = FirebaseAuth.getInstance().getUid() + receiveId;
+
+                            database.getReference().child("Chats").child(senderRoom)
+                                    .child(messageModel.getMessageId())
+                                    .setValue(null);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+
+            return false;
+        });
+
         if(holder.getClass() == SenderViewHolder.class) {
-            ((SenderViewHolder) holder).senderMessage.setText(messageModel.getMessageId());
-            ((SenderViewHolder) holder).senderTime.setText(messageModel.getTimestamp().toString());
+            ((SenderViewHolder) holder).senderMessage.setText(messageModel.getMessage());
+
+            Date date = new Date(messageModel.getTimestamp());
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm a");
+
+            String strDate = simpleDateFormat.format(date);
+            ((SenderViewHolder) holder).senderTime.setText(strDate);
+
         } else {
-            ((ReceiverViewHolder) holder).receiveMessage.setText(messageModel.getMessageId());
-            ((ReceiverViewHolder) holder).receiveTime.setText(messageModel.getTimestamp().toString());
+            ((ReceiverViewHolder) holder).receiveMessage.setText(messageModel.getMessage());
+
+            Date date = new Date(messageModel.getTimestamp());
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm a");
+
+            String strDate = simpleDateFormat.format(date);
+            ((ReceiverViewHolder) holder).receiveTime.setText(strDate);
         }
     }
 
