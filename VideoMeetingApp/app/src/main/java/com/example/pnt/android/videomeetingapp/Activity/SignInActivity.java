@@ -88,6 +88,7 @@ public class SignInActivity extends AppCompatActivity {
                         DocumentSnapshot snapshot = task.getResult().getDocuments().get(0);
 
                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                        preferenceManager.putString(Constants.KEY_USER_ID, snapshot.getId());
                         preferenceManager.putString(Constants.KEY_FIRST_NAME, snapshot.getString(Constants.KEY_FIRST_NAME));
                         preferenceManager.putString(Constants.KEY_LAST_NAME, snapshot.getString(Constants.KEY_LAST_NAME));
                         preferenceManager.putString(Constants.KEY_EMAIL, snapshot.getString(Constants.KEY_EMAIL));
