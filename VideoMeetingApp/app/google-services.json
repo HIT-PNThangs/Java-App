@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1093761713775",
+    "project_id": "meeting-app-fcd84",
+    "storage_bucket": "meeting-app-fcd84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093761713775:android:790acdbaf04433bdfe2f9a",
+        "android_client_info": {
+          "package_name": "com.example.pnt.android.videomeetingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093761713775-p8r9g5qpj1cq8pk4jfj865ugmtc5uh0g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pnt.android.videomeetingapp",
+            "certificate_hash": "d7746d7ed289d286d503db83750f6fa8cdced0f0"
+          }
+        },
+        {
+          "client_id": "1093761713775-p5hhkcilhacqig08pa5o9t43jah51asf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFPi3WZElN74Kb0wK81w_jE0nUnGamXq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093761713775-p5hhkcilhacqig08pa5o9t43jah51asf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

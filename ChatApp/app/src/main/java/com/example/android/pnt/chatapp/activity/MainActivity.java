@@ -185,9 +185,7 @@ public class MainActivity extends BaseActivity implements ConversionListener {
                     startActivity(new Intent(getApplicationContext(), SignInActivity.class));
                     finish();
                 })
-                .addOnFailureListener(e -> {
-                    showToast("Unable to sign out");
-                });
+                .addOnFailureListener(e -> showToast("Unable to sign out"));
     }
 
     @Override

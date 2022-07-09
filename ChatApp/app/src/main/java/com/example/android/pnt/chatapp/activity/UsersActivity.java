@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.android.pnt.chatapp.adapter.UserAdapter;
 import com.example.android.pnt.chatapp.databinding.ActivityUsersBinding;
 import com.example.android.pnt.chatapp.listener.UserListener;
@@ -37,10 +35,6 @@ public class UsersActivity extends BaseActivity implements UserListener {
 
         getUser();
 
-        setListener();
-    }
-
-    private void setListener() {
         binding.imageBack.setOnClickListener(v -> onBackPressed());
     }
 
@@ -54,11 +48,11 @@ public class UsersActivity extends BaseActivity implements UserListener {
                     dialog.dismiss();
                     String currentUserId = preferenceManager.getString(Constant.KEY_USER_ID);
 
-                    if(task.isSuccessful() && task.getResult() != null) {
+                    if (task.isSuccessful() && task.getResult() != null) {
                         List<User> users = new ArrayList<>();
 
-                        for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                            if(currentUserId.equals(documentSnapshot.getId())) {
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            if (currentUserId.equals(documentSnapshot.getId())) {
                                 continue;
                             }
 
