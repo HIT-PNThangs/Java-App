@@ -7,17 +7,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pnt.android.videomeetingapp.Listener.UserListener;
 import com.example.pnt.android.videomeetingapp.Models.User;
 import com.example.pnt.android.videomeetingapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private List<User> list;
     private UserListener listener;
+    private List<User> selectedUsers;
 
     public UserAdapter() {
     }
@@ -29,6 +32,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public UserAdapter(List<User> list, UserListener listener) {
         this.list = list;
         this.listener = listener;
+        selectedUsers = new ArrayList<>();
+    }
+
+    public List<User> getSelectedUsers() {
+        return selectedUsers;
     }
 
     @NonNull
@@ -55,7 +63,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     class UserViewHolder extends RecyclerView.ViewHolder {
         TextView txtFirstChar, txtUserName, txtEmail;
-        ImageView imgAudio, imgVideo;
+        ImageView imgAudio, imgVideo, imgSelected;
+        ConstraintLayout userConstraint;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +75,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
             imgAudio = itemView.findViewById(R.id.imageAudioMeeting);
             imgVideo = itemView.findViewById(R.id.imageVideoMeeting);
+            imgSelected = itemView.findViewById(R.id.imageSelected);
+
+            userConstraint = itemView.findViewById(R.id.userContainer);
         }
 
         void setUserData(User user) {
@@ -75,6 +87,41 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
             imgAudio.setOnClickListener(view -> listener.initiateAudioMeeting(user));
             imgVideo.setOnClickListener(view -> listener.initiateVideoMeeting(user));
+
+            userConstraint.setOnLongClickListener(view -> {
+                if (imgSelected.getVisibility() != View.VISIBLE) {
+                    selectedUsers.add(user);
+
+                    imgSelected.setVisibility(View.VISIBLE);
+                    imgVideo.setVisibility(View.GONE);
+                    imgAudio.setVisibility(View.GONE);
+                    listener.onMultipleUsersAction(true);
+                }
+
+                return true;
+            });
+
+            userConstraint.setOnClickListener(view -> {
+                if (imgSelected.getVisibility() == View.VISIBLE) {
+                    selectedUsers.remove(user);
+
+                    imgSelected.setVisibility(View.GONE);
+                    imgVideo.setVisibility(View.VISIBLE);
+                    imgAudio.setVisibility(View.VISIBLE);
+
+                    if (selectedUsers.size() == 0) {
+                        listener.onMultipleUsersAction(false);
+                    }
+                } else {
+                    if (selectedUsers.size() > 0) {
+                        selectedUsers.add(user);
+
+                        imgSelected.setVisibility(View.VISIBLE);
+                        imgVideo.setVisibility(View.GONE);
+                        imgAudio.setVisibility(View.GONE);
+                    }
+                }
+            });
         }
     }
 }
