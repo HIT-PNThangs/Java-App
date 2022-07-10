@@ -9,4 +9,6 @@
     <color name="colorTextIcons">#ffffff</color>
     <color name="colorBackground">#fafafa</color>
     <color name="colorHintText">#bdbdbd</color>
+    <color name="colorMeetingInvitationStart">#4004bb</color>
+    <color name="colorMeetingInvitationEnd">#8a1aaa</color>
 </resources>

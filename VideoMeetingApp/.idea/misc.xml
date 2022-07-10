@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/drawable/background_accept_invitation.xml" value="0.181" />
+        <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/drawable/background_meeting_invitation.xml" value="0.181" />
+        <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/drawable/background_meeting_invitation_user_icon.xml" value="0.181" />
+        <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/drawable/background_reject_invitation.xml" value="0.181" />
         <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/drawable/background_user_icon.xml" value="0.103" />
+        <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/layout/activity_incoming_invitation.xml" value="0.26403985507246375" />
         <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/layout/activity_main.xml" value="0.26403985507246375" />
+        <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/layout/activity_outgoing_invitation.xml" value="0.26403985507246375" />
         <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/layout/activity_sign_in.xml" value="0.264" />
         <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/layout/activity_sign_up.xml" value="0.2755208333333333" />
         <entry key="..\:/Android-App/VideoMeetingApp/app/src/main/res/layout/item_container_user.xml" value="0.26403985507246375" />

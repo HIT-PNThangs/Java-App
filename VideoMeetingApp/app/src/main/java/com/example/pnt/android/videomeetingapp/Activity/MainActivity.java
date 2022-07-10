@@ -58,12 +58,9 @@ public class MainActivity extends AppCompatActivity implements UserListener {
                 )
         );
 
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    sendFCMTokenToDatabase(task.getResult());
-                }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                sendFCMTokenToDatabase(task.getResult());
             }
         });
 
@@ -71,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements UserListener {
         userAdapter = new UserAdapter(users, this);
 
         binding.userRecyclerView.setAdapter(userAdapter);
+
+        binding.swipeRefresh.setOnRefreshListener(this::getAllUsers);
 
         getAllUsers();
     }
@@ -110,12 +109,18 @@ public class MainActivity extends AppCompatActivity implements UserListener {
 
     @SuppressLint("NotifyDataSetChanged")
     private void getAllUsers() {
+        binding.swipeRefresh.setRefreshing(true);
+
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .get()
                 .addOnCompleteListener(task -> {
+                    binding.swipeRefresh.setRefreshing(false);
+
                     String myUserId = preferenceManager.getString(Constants.KEY_USER_ID);
 
                     if (task.isSuccessful() && task.getResult() != null) {
+                        users.clear();
+
                         for (QueryDocumentSnapshot snapshot : task.getResult()) {
                             if (myUserId.equals(snapshot.getId())) {
                                 continue;
@@ -150,9 +155,12 @@ public class MainActivity extends AppCompatActivity implements UserListener {
                     user.getFirstName() + " " + user.getLastName() + " is not available for meeting",
                     Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(),
-                    "Video meeting with " + user.getFirstName() + " " + user.getLastName(),
-                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), OutgoingInvitationActivity.class);
+
+            intent.putExtra("user", user);
+            intent.putExtra("type", "video");
+
+            startActivity(intent);
         }
     }
 
@@ -163,9 +171,7 @@ public class MainActivity extends AppCompatActivity implements UserListener {
                     user.getFirstName() + " " + user.getLastName() + " is not available for audio",
                     Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(),
-                    "Audio meeting with " + user.getFirstName() + " " + user.getLastName(),
-                    Toast.LENGTH_LONG).show();
+
         }
     }
 }
