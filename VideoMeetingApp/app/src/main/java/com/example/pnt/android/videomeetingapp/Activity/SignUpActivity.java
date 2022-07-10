@@ -52,13 +52,13 @@ public class SignUpActivity extends AppCompatActivity {
                 showToast("Enter Last Name");
             } else if (strEmail.isEmpty()) {
                 showToast("Enter Email");
-            } else if(!isEmail(strEmail)) {
+            } else if (!isEmail(strEmail)) {
                 showToast("Enter valid Email");
             } else if (strPassword.isEmpty()) {
                 showToast("Enter Password");
             } else if (strConfirmPassword.isEmpty()) {
                 showToast("Enter Confirm Password");
-            } else if(!strPassword.equals(strConfirmPassword)) {
+            } else if (!strPassword.equals(strConfirmPassword)) {
                 showToast("Password & Confirm Password must be same");
             } else {
                 signUp();
@@ -79,8 +79,55 @@ public class SignUpActivity extends AppCompatActivity {
         binding.signUpProgressBar.setVisibility(View.VISIBLE);
         binding.btSignUp.setVisibility(View.GONE);
 
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        auth.createUserWithEmailAndPassword(binding.inputEmail.getText().toString().trim(),
+//                binding.inputPassword.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if (task.isSuccessful()) {
+//                    FirebaseFirestore database = FirebaseFirestore.getInstance();
+//                    HashMap<String, Object> user = new HashMap<>();
+//
+//                    user.put(Constants.KEY_FIRST_NAME, binding.inputFirstName.getText().toString().trim());
+//                    user.put(Constants.KEY_LAST_NAME, binding.inputLastName.getText().toString().trim());
+//                    user.put(Constants.KEY_EMAIL, binding.inputEmail.getText().toString().trim());
+//
+//                    database.collection(Constants.KEY_COLLECTION_USERS)
+//                            .add(user)
+//                            .addOnSuccessListener(documentReference -> {
+//                                binding.signUpProgressBar.setVisibility(View.VISIBLE);
+//                                binding.btSignUp.setVisibility(View.GONE);
+//
+//                                preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+//                                preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
+//                                preferenceManager.putString(Constants.KEY_FIRST_NAME, binding.inputFirstName.getText().toString().trim());
+//                                preferenceManager.putString(Constants.KEY_LAST_NAME, binding.inputLastName.getText().toString().trim());
+//                                preferenceManager.putString(Constants.KEY_EMAIL, binding.inputEmail.getText().toString().trim());
+//
+//                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
+//                                finish();
+//                            })
+//                            .addOnFailureListener(e -> {
+//                                binding.signUpProgressBar.setVisibility(View.GONE);
+//                                binding.btSignUp.setVisibility(View.VISIBLE);
+//
+//                                showToast("Error: " + e.getMessage());
+//                            });
+//                } else {
+//                    binding.signUpProgressBar.setVisibility(View.VISIBLE);
+//                    binding.btSignUp.setVisibility(View.GONE);
+//
+//                    Toast.makeText(getApplicationContext(),
+//                            Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         HashMap<String, Object> user = new HashMap<>();
+
         user.put(Constants.KEY_FIRST_NAME, binding.inputFirstName.getText().toString().trim());
         user.put(Constants.KEY_LAST_NAME, binding.inputLastName.getText().toString().trim());
         user.put(Constants.KEY_EMAIL, binding.inputEmail.getText().toString().trim());

@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements UserListener {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == REQUEST_CODE_BATTERY_OPTIMIZATIONS) {
+        if (requestCode == REQUEST_CODE_BATTERY_OPTIMIZATIONS) {
             checkForBatteryOptimizations();
         }
     }

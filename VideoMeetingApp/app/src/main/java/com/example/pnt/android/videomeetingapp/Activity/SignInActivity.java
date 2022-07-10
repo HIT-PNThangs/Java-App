@@ -35,7 +35,7 @@ public class SignInActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         preferenceManager = new PreferenceManager(getApplicationContext());
 
-        if(preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)) {
+        if (preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -76,16 +76,49 @@ public class SignInActivity extends AppCompatActivity {
         binding.signInProgressBar.setVisibility(View.VISIBLE);
         binding.btSignIn.setVisibility(View.GONE);
 
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        auth.signInWithEmailAndPassword(binding.inputEmail.getText().toString().trim(), binding.inputPassword.getText().toString().trim())
+//                .addOnCompleteListener(task -> {
+//                    binding.signInProgressBar.setVisibility(View.GONE);
+//                    binding.btSignIn.setVisibility(View.VISIBLE);
+//
+//                    if (task.isSuccessful()) {
+//                        database.collection(Constants.KEY_COLLECTION_USERS)
+//                                .whereEqualTo(Constants.KEY_EMAIL, binding.inputEmail.getText().toString().trim())
+//                                .get()
+//                                .addOnCompleteListener(task1 -> {
+//                                    if (task1.isSuccessful() && task1.getResult() != null && task1.getResult().getDocuments().size() > 0) {
+//
+//                                        DocumentSnapshot snapshot = task1.getResult().getDocuments().get(0);
+//
+//                                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+//                                        preferenceManager.putString(Constants.KEY_USER_ID, snapshot.getId());
+//                                        preferenceManager.putString(Constants.KEY_FIRST_NAME, snapshot.getString(Constants.KEY_FIRST_NAME));
+//                                        preferenceManager.putString(Constants.KEY_LAST_NAME, snapshot.getString(Constants.KEY_LAST_NAME));
+//                                        preferenceManager.putString(Constants.KEY_EMAIL, snapshot.getString(Constants.KEY_EMAIL));
+//
+//                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                        startActivity(intent);
+//                                        finish();
+//                                    } else {
+//                                        binding.signInProgressBar.setVisibility(View.GONE);
+//                                        binding.btSignIn.setVisibility(View.VISIBLE);
+//
+//                                        showToast("Unable to sign in");
+//                                    }
+//                                });
+//                    }
+//                });
+
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .whereEqualTo(Constants.KEY_EMAIL, binding.inputEmail.getText().toString().trim())
                 .whereEqualTo(Constants.KEY_PASSWORD, binding.inputPassword.getText().toString().trim())
                 .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0) {
-                        binding.signInProgressBar.setVisibility(View.GONE);
-                        binding.btSignIn.setVisibility(View.VISIBLE);
+                .addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful() && task1.getResult() != null && task1.getResult().getDocuments().size() > 0) {
 
-                        DocumentSnapshot snapshot = task.getResult().getDocuments().get(0);
+                        DocumentSnapshot snapshot = task1.getResult().getDocuments().get(0);
 
                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
                         preferenceManager.putString(Constants.KEY_USER_ID, snapshot.getId());

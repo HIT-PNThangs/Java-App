@@ -1,9 +1,5 @@
 package com.example.pnt.android.videomeetingapp.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,13 +7,16 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.example.pnt.android.videomeetingapp.Network.ApiClient;
 import com.example.pnt.android.videomeetingapp.Network.ApiService;
 import com.example.pnt.android.videomeetingapp.R;
 import com.example.pnt.android.videomeetingapp.Utilities.Constants;
 import com.example.pnt.android.videomeetingapp.databinding.ActivityIncomingInvitationBinding;
 
-import org.jitsi.meet.sdk.JitsiMeet;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 import org.json.JSONArray;
@@ -72,19 +71,15 @@ public class IncomingInvitationActivity extends AppCompatActivity {
     }
 
     private void setListener() {
-        binding.imgAcceptInvitation.setOnClickListener(view -> {
-            sendInvitationResponse(
-                    Constants.REMOTE_MSG_INVITATION_ACCEPTED,
-                    getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN)
-            );
-        });
+        binding.imgAcceptInvitation.setOnClickListener(view -> sendInvitationResponse(
+                Constants.REMOTE_MSG_INVITATION_ACCEPTED,
+                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN)
+        ));
 
-        binding.imgStopInvitation.setOnClickListener(view -> {
-            sendInvitationResponse(
-                    Constants.REMOTE_MSG_INVITATION_REJECTED,
-                    getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN)
-            );
-        });
+        binding.imgStopInvitation.setOnClickListener(view -> sendInvitationResponse(
+                Constants.REMOTE_MSG_INVITATION_REJECTED,
+                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN)
+        ));
     }
 
     private void sendInvitationResponse(String type, String receiverToken) {

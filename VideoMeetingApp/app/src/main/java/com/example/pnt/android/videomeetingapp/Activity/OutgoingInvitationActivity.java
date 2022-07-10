@@ -102,7 +102,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
 
                         List<User> receivers = new Gson().fromJson(getIntent().getStringExtra("selectedUsers"), type1);
 
-                        if(receivers != null) {
+                        if (receivers != null) {
                             totalReceivers = receivers.size();
                         }
 
@@ -201,12 +201,13 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         try {
             JSONArray tokens = new JSONArray();
 
-            if(receiverToken != null) {
+            if (receiverToken != null) {
                 tokens.put(receiverToken);
             }
 
-            if(receivers != null && receivers.size() > 0) {
-                for(User user : receivers) tokens.put(user.getToken());
+            if (receivers != null && receivers.size() > 0) {
+                for (User user : receivers)
+                    tokens.put(user.getToken());
             }
 
             JSONObject body = new JSONObject();
@@ -255,7 +256,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
                 } else if (type.equals(Constants.REMOTE_MSG_INVITATION_REJECTED)) {
                     rejectionCount += 1;
 
-                    if(rejectionCount == totalReceivers) {
+                    if (rejectionCount == totalReceivers) {
                         Toast.makeText(OutgoingInvitationActivity.this,
                                 "Invitation Rejected", Toast.LENGTH_LONG).show();
                         finish();
