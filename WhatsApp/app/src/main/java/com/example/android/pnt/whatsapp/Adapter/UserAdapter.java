@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.pnt.whatsapp.Activity.ChatDetailActivity;
 import com.example.android.pnt.whatsapp.Model.Users;
 import com.example.android.pnt.whatsapp.R;
-import com.example.android.pnt.whatsapp.Activity.ChatDetailActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +28,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     List<Users> list;
     Context context;
 
-    public UserAdapter() { }
+    public UserAdapter() {
+    }
 
     public UserAdapter(List<Users> list, Context context) {
         this.list = list;
@@ -57,8 +58,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.hasChildren()) {
-                            for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (snapshot.hasChildren()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 holder.lastMessage.setText(Objects.requireNonNull(dataSnapshot.child("message").getValue()).toString());
                             }
                         }

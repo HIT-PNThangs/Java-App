@@ -1,13 +1,13 @@
 package com.example.android.pnt.whatsapp.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.pnt.whatsapp.Model.Users;
 import com.example.android.pnt.whatsapp.R;
@@ -59,7 +59,7 @@ public class SettingActivity extends AppCompatActivity {
 
                         Picasso.get()
                                 .load(Objects.requireNonNull(users)
-                                .getProfilePic())
+                                        .getProfilePic())
                                 .placeholder(R.drawable.avatar)
                                 .into(binding.profileImage);
 
@@ -92,7 +92,7 @@ public class SettingActivity extends AppCompatActivity {
             String status = binding.edStatus.getText().toString().trim();
             String userName = binding.txtUserName.getText().toString().trim();
 
-            if(!status.equals("") && !userName.equals("")) {
+            if (!status.equals("") && !userName.equals("")) {
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("userName", userName);
                 map.put("status", status);
@@ -116,7 +116,7 @@ public class SettingActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(data.getData() != null) {
+        if (data.getData() != null) {
             Uri sFile = data.getData();
             binding.profileImage.setImageURI(sFile);
 

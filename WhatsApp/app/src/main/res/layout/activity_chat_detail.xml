@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ChatDetailActivity"
-    android:background="@drawable/w4">
+    android:background="@drawable/w4"
+    tools:context=".Activity.ChatDetailActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
@@ -31,24 +31,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_weight="1"
             android:background="@drawable/background_editext_message"
             android:ems="10"
             android:hint="Enter your Message"
+            android:importantForAutofill="no"
             android:inputType="text"
             android:padding="10dp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
         <ImageView
+            android:id="@+id/send"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/send"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginRight="4dp"
-            android:src="@drawable/send" />
+            android:src="@drawable/send"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
@@ -72,7 +73,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="ContentDescription,MissingConstraints" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
@@ -90,13 +91,14 @@
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User Name"
                 android:layout_marginStart="@dimen/_4sdp"
+                android:text="User Name"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_image"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toTopOf="@+id/profile_image" />
+                app:layout_constraintTop_toTopOf="@+id/profile_image"
+                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -106,7 +108,8 @@
                 android:src="@drawable/menu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -116,16 +119,18 @@
                 android:src="@drawable/videocall"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/call"
                 android:layout_marginEnd="10dp"
+                android:src="@drawable/call"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 </RelativeLayout>

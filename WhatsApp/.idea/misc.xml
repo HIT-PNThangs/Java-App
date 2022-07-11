@@ -15,9 +15,12 @@
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/activity_setting.xml" value="0.2755208333333333" />
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/activity_sign_in.xml" value="0.26766304347826086" />
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/activity_sign_up.xml" value="0.26766304347826086" />
+        <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/activity_splash.xml" value="0.2755208333333333" />
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/background_editext_message.xml" value="0.19655797101449277" />
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/fragment_calls.xml" value="0.2755208333333333" />
-        <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/fragment_chats.xml" value="0.4" />
+        <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/fragment_chats.xml" value="0.2" />
+        <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/fragment_status.xml" value="0.4" />
+        <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/item_status.xml" value="0.27447916666666666" />
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/sample_reciver.xml" value="0.6" />
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/sample_sender.xml" value="0.6" />
         <entry key="..\:/Android-App/WhatsApp/app/src/main/res/layout/sample_show_user.xml" value="0.264" />

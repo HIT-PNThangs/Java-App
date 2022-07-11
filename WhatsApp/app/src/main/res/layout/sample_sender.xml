@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TextViewEdits" />
+            tools:ignore="HardcodedText,TextViewEdits" />
 
         <TextView
             android:id="@+id/sender_time"
@@ -53,6 +53,7 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/sender_text"
-            app:layout_constraintTop_toBottomOf="@+id/sender_text" />
+            app:layout_constraintTop_toBottomOf="@+id/sender_text"
+            tools:ignore="HardcodedText,SmallSp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

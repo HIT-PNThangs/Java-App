@@ -1,17 +1,16 @@
 package com.example.android.pnt.whatsapp.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.android.pnt.whatsapp.Adapter.ChatAdapter;
 import com.example.android.pnt.whatsapp.Model.MessageModel;
-import com.example.android.pnt.whatsapp.R;
 import com.example.android.pnt.whatsapp.databinding.ActivityGroupChatBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TooManyListenersException;
 
 public class GroupChatActivity extends AppCompatActivity {
 
@@ -62,7 +60,7 @@ public class GroupChatActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         messageModels.clear();
 
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             MessageModel model = dataSnapshot.getValue(MessageModel.class);
 
                             messageModels.add(model);

@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextViewEdits" />
+        tools:ignore="HardcodedText,TextViewEdits" />
 
     <TextView
         android:id="@+id/receive_time"
@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/receive_text"
         app:layout_constraintTop_toBottomOf="@+id/receive_text"
-        tools:ignore="SmallSp" />
+        tools:ignore="HardcodedText,SmallSp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

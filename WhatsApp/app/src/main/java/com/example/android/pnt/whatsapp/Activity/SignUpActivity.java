@@ -1,12 +1,12 @@
 package com.example.android.pnt.whatsapp.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.pnt.whatsapp.Model.Users;
 import com.example.android.pnt.whatsapp.databinding.ActivitySignUpBinding;
@@ -57,13 +57,13 @@ public class SignUpActivity extends AppCompatActivity {
         String strPass = Objects.requireNonNull(binding.edtPass.getText()).toString().trim();
         String strRePass = Objects.requireNonNull(binding.edtRePass.getText()).toString().trim();
 
-        if(!strEmail.isEmpty() && !strUserName.isEmpty() && !strPass.isEmpty() && !strRePass.isEmpty()) {
+        if (!strEmail.isEmpty() && !strUserName.isEmpty() && !strPass.isEmpty() && !strRePass.isEmpty()) {
             binding.progressBar.setVisibility(View.VISIBLE);
 
             auth.createUserWithEmailAndPassword(strEmail, strPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         binding.progressBar.setVisibility(View.GONE);
 
                         Users users = new Users(strUserName, strEmail, strPass);

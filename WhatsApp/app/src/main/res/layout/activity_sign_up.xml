@@ -23,7 +23,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_whatsapp" />
+            app:srcCompat="@drawable/ic_whatsapp"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
@@ -33,10 +34,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            app:endIconMode="clear_text"
-            android:textColor="@color/white"
             android:inputType="textEmailAddress"
+            android:textColor="@color/white"
             android:textColorHint="@color/white"
+            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgChat">
@@ -46,20 +47,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your email"
-                android:textColor="@color/white"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtUsername"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="8dp"
-            android:textColorHint="@color/white"
             android:layout_below="@id/layoutEdtRePass"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="@+id/layoutEdtEmail"
             app:layout_constraintStart_toStartOf="@+id/layoutEdtEmail"
@@ -70,9 +71,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your username"
-                android:textColor="@color/white"
                 android:imeOptions="actionNext"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -94,10 +95,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your password"
-                android:textColor="@color/white"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -119,10 +120,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Confirm your password"
-                android:textColor="@color/white"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -130,12 +131,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:text="Already Have Account"
             android:textColor="@color/white"
-            android:padding="5dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/layoutEdtRePass"
-            app:layout_constraintTop_toBottomOf="@+id/layoutEdtRePass" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutEdtRePass"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnSignIn"
@@ -150,7 +152,8 @@
             android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="@+id/layoutEdtRePass"
             app:layout_constraintStart_toStartOf="@+id/layoutEdtRePass"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -168,28 +171,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_marginRight="@dimen/_4sdp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
-                android:drawableLeft="@drawable/ic_google"
+                android:drawableStart="@drawable/ic_google"
                 android:padding="@dimen/_12sdp"
                 android:text="Google"
                 android:textAllCaps="false"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btnFacbook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
-                android:layout_marginLeft="@dimen/_4sdp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/fb_color"
-                android:drawableLeft="@drawable/ic_facebook"
+                android:drawableStart="@drawable/ic_facebook"
                 android:padding="@dimen/_12sdp"
                 android:text="Facebook"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle,HardcodedText" />
         </LinearLayout>
 
         <TextView
@@ -198,11 +201,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Sign Up With Phone"
-            android:textSize="@dimen/_16sdp"
             android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            tools:ignore="HardcodedText" />
 
         <ProgressBar
             android:id="@+id/progressBar"

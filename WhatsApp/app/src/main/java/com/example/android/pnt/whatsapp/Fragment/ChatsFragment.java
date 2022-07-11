@@ -2,19 +2,16 @@ package com.example.android.pnt.whatsapp.Fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
 import com.example.android.pnt.whatsapp.Adapter.UserAdapter;
 import com.example.android.pnt.whatsapp.Model.Users;
-import com.example.android.pnt.whatsapp.R;
 import com.example.android.pnt.whatsapp.databinding.FragmentChatsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatsFragment extends Fragment {
-    public ChatsFragment() { }
+    public ChatsFragment() {
+    }
 
     FragmentChatsBinding binding;
     List<Users> list = new ArrayList<>();
@@ -48,12 +46,13 @@ public class ChatsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
 
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Users users = dataSnapshot.getValue(Users.class);
 
-                    if(users != null) {
+                    if (users != null) {
                         users.setUserId(dataSnapshot.getKey());
-                        if(!users.getUserId().equals(FirebaseAuth.getInstance().getUid())) list.add(users);
+                        if (!users.getUserId().equals(FirebaseAuth.getInstance().getUid()))
+                            list.add(users);
                     }
                 }
 

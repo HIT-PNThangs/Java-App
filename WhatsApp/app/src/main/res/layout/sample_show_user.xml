@@ -28,13 +28,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
+            android:maxLines="1"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:maxLines="1"
             android:text="abc"
+            android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"
-            android:textColor="@color/black" />
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/lastMessage"
@@ -42,11 +43,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
+            android:maxLines="1"
             android:paddingTop="@dimen/_2sdp"
             android:paddingBottom="@dimen/_2sdp"
             android:text="last message"
-            android:maxLines="1"
+            android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
-            android:textColor="@color/black" />
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 </LinearLayout>

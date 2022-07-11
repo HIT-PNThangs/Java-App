@@ -1,18 +1,16 @@
 package com.example.android.pnt.whatsapp.Activity;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import com.example.android.pnt.whatsapp.Adapter.ChatAdapter;
 import com.example.android.pnt.whatsapp.Model.MessageModel;
 import com.example.android.pnt.whatsapp.R;
 import com.example.android.pnt.whatsapp.databinding.ActivityChatDetailBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
