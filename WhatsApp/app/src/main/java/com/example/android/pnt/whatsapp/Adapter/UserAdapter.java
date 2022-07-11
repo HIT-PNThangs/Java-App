@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     List<Users> list;
@@ -58,7 +59,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.hasChildren()) {
                             for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                holder.lastMessage.setText(snapshot.child("message").getValue().toString());
+                                holder.lastMessage.setText(Objects.requireNonNull(dataSnapshot.child("message").getValue()).toString());
                             }
                         }
                     }

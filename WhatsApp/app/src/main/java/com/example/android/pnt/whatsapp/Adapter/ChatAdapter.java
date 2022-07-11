@@ -3,7 +3,6 @@ package com.example.android.pnt.whatsapp.Adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
     final int SENDER_VIEW_TYPE = 1;
     final int RECEIVER_VIEW_TYPE = 2;
 
-    public ChatAdapter() { }
+    public ChatAdapter() {
+    }
 
     public ChatAdapter(List<MessageModel> messageModels, Context context) {
         this.messageModels = messageModels;
@@ -44,7 +44,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if(messageModels.get(position).getuId().equals(FirebaseAuth.getInstance().getUid())) {
+        if (messageModels.get(position).getuId().equals(FirebaseAuth.getInstance().getUid())) {
             return SENDER_VIEW_TYPE;
         } else {
             return RECEIVER_VIEW_TYPE;
@@ -54,7 +54,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(viewType == SENDER_VIEW_TYPE) {
+        if (viewType == SENDER_VIEW_TYPE) {
             View view = LayoutInflater.from(context).inflate(R.layout.sample_sender, parent, false);
             return new SenderViewHolder(view);
         } else {
@@ -72,29 +72,21 @@ public class ChatAdapter extends RecyclerView.Adapter {
             new AlertDialog.Builder(context)
                     .setTitle("Delete")
                     .setMessage("Are you sure want to delete this message?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            String senderRoom = FirebaseAuth.getInstance().getUid() + receiveId;
+                    .setPositiveButton("Yes", (dialogInterface, i) -> {
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        String senderRoom = FirebaseAuth.getInstance().getUid() + receiveId;
 
-                            database.getReference().child("Chats").child(senderRoom)
-                                    .child(messageModel.getMessageId())
-                                    .setValue(null);
-                        }
+                        database.getReference().child("Chats").child(senderRoom)
+                                .child(messageModel.getMessageId())
+                                .setValue(null);
                     })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    })
+                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss())
                     .show();
 
             return false;
         });
 
-        if(holder.getClass() == SenderViewHolder.class) {
+        if (holder.getClass() == SenderViewHolder.class) {
             ((SenderViewHolder) holder).senderMessage.setText(messageModel.getMessage());
 
             Date date = new Date(messageModel.getTimestamp());

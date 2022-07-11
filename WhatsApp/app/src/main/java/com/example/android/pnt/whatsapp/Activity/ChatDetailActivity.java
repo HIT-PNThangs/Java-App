@@ -29,9 +29,7 @@ public class ChatDetailActivity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseAuth auth;
 
-    String senderId;
-    String senderRoom;
-    String receiverRoom;
+    String senderId, senderRoom, receiverRoom;
     List<MessageModel> messageModels;
     ChatAdapter chatAdapter;
 
@@ -52,29 +50,19 @@ public class ChatDetailActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        String senderId = auth.getUid();
+        senderId = auth.getUid();
+
         String receiveId = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
+
+        senderRoom = senderId + receiveId;
+        receiverRoom = receiveId + senderId;
 
         binding.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.avatar).into(binding.profileImage);
 
         messageModels = new ArrayList<>();
-        chatAdapter = new ChatAdapter(messageModels, this, receiveId);
-
-        binding.chatRecyclerView.setAdapter(chatAdapter);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        binding.chatRecyclerView.setLayoutManager(manager);
-
-        senderRoom = senderId + receiveId;
-        receiverRoom = receiveId + senderId;
-    }
-
-    private void setListener() {
-        binding.back.setOnClickListener(v -> {
-            finish();
-        });
 
         database.getReference().child("Chats")
                 .child(senderRoom)
@@ -83,11 +71,12 @@ public class ChatDetailActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         messageModels.clear();
-                        for(DataSnapshot item : snapshot.getChildren()) {
+
+                        for (DataSnapshot item : snapshot.getChildren()) {
                             MessageModel model = item.getValue(MessageModel.class);
 
-                            if(model != null) {
-                                model.setMessage(item.getKey());
+                            if (model != null) {
+                                model.setMessageId(item.getKey());
                                 messageModels.add(model);
                             }
                         }
@@ -101,24 +90,37 @@ public class ChatDetailActivity extends AppCompatActivity {
                     }
                 });
 
+        chatAdapter = new ChatAdapter(messageModels, this, receiveId);
+
+        binding.chatRecyclerView.setAdapter(chatAdapter);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        binding.chatRecyclerView.setLayoutManager(manager);
+    }
+
+    private void setListener() {
+        binding.back.setOnClickListener(v -> {
+            finish();
+        });
 
         binding.send.setOnClickListener(v -> {
             String message = binding.enterMessage.getText().toString();
             MessageModel model = new MessageModel(senderId, message);
             model.setTimestamp(new Date().getTime());
+            model.setuId(auth.getUid());
+
             binding.enterMessage.setText("");
 
-            database.getReference().child("Chats").child(senderRoom).push()
-                    .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
+            database.getReference()
+                    .child("Chats")
+                    .child(senderRoom)
+                    .push()
+                    .setValue(model)
+                    .addOnSuccessListener(unused ->
                             database.getReference()
                                     .child("Chats")
                                     .child(receiverRoom)
                                     .push()
-                                    .setValue(model);
-                        }
-                    });
+                                    .setValue(model));
         });
     }
 }
