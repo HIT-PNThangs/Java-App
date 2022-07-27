@@ -60,25 +60,22 @@ public class SignUpActivity extends AppCompatActivity {
         if (!strEmail.isEmpty() && !strUserName.isEmpty() && !strPass.isEmpty() && !strRePass.isEmpty()) {
             binding.progressBar.setVisibility(View.VISIBLE);
 
-            auth.createUserWithEmailAndPassword(strEmail, strPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        binding.progressBar.setVisibility(View.GONE);
+            auth.createUserWithEmailAndPassword(strEmail, strPass).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    binding.progressBar.setVisibility(View.GONE);
 
-                        Users users = new Users(strUserName, strEmail, strPass);
-                        String id = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                    Users users = new Users(strUserName, strEmail, strPass);
+                    String id = Objects.requireNonNull(task.getResult().getUser()).getUid();
 
-                        database.getReference().child("Users").child(id).setValue(users);
+                    database.getReference().child("Users").child(id).setValue(users);
 
-                        showToast("Sign Up Success");
+                    showToast("Sign Up Success");
 
-                        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                    } else {
-                        binding.progressBar.setVisibility(View.GONE);
+                    startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                } else {
+                    binding.progressBar.setVisibility(View.GONE);
 
-                        showToast(Objects.requireNonNull(task.getException()).toString());
-                    }
+                    showToast(Objects.requireNonNull(task.getException()).toString());
                 }
             });
         } else {

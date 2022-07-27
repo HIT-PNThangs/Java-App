@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements UserListener {
                             }
 
                             User user = new User();
+
                             user.setFirstName(snapshot.getString(Constants.KEY_FIRST_NAME));
                             user.setLastName(snapshot.getString(Constants.KEY_LAST_NAME));
                             user.setEmail(snapshot.getString(Constants.KEY_EMAIL));

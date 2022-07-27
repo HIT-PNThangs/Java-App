@@ -35,7 +35,6 @@ public class SignInActivity extends AppCompatActivity {
     // Sign In with Google by Firebase
     GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
-    private static final String TAG = "Sign In";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +78,14 @@ public class SignInActivity extends AppCompatActivity {
                 binding.progressBar2.setVisibility(View.VISIBLE);
 
                 auth.signInWithEmailAndPassword(strEmail, strPass)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                binding.progressBar2.setVisibility(View.GONE);
+                        .addOnCompleteListener(task -> {
+                            binding.progressBar2.setVisibility(View.GONE);
 
-                                if (task.isSuccessful()) {
-                                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                                    showToast("Sign In Success.");
-                                } else {
-                                    showToast(Objects.requireNonNull(task.getException()).toString());
-                                }
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                                showToast("Sign In Success.");
+                            } else {
+                                showToast(Objects.requireNonNull(task.getException()).toString());
                             }
                         });
             } else {
@@ -110,14 +106,15 @@ public class SignInActivity extends AppCompatActivity {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+                Log.d("Sign In", "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
+                Log.w("Sign In", "Google sign in failed", e);
                 showToast("Google sign in failed: " + e);
             }
         }
@@ -133,11 +130,11 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+                            Log.d("Sign In", "signInWithCredential:success");
                             FirebaseUser user = auth.getCurrentUser();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Log.w("Sign In", "signInWithCredential:failure", task.getException());
                             showToast("signInWithCredential:failure" + task.getException());
                         }
                     }
