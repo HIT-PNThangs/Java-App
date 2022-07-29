@@ -10,4 +10,4 @@ data class ArtistX(
     val link: String,
     val name: String,
     val thumbnail: String
-):Parcelable
+) : Parcelable

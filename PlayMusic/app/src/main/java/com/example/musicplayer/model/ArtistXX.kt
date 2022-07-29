@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class ArtistXX(
     val link: String,
     val name: String
-):Parcelable
+) : Parcelable

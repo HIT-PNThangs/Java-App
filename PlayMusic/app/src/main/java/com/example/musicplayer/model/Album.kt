@@ -14,4 +14,4 @@ data class Album(
     val thumbnail: String,
     val thumbnail_medium: String,
     val title: String
-):Parcelable
+) : Parcelable

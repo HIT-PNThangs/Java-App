@@ -21,13 +21,17 @@ interface ApiMusic {
     fun getSongSearch(
         @Query("type") type: String, @Query("num") num: Int, @Query("query")
         query: String
-    ): Call<MusicSearch>
+    ) : Call<MusicSearch>
 
     companion object {
-        val api = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+        val api = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("http://mp3.zing.vn/")
-            .build().create(ApiMusic::class.java)
-        val search = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiMusic::class.java)
+
+        val search = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("http://ac.mp3.zing.vn/")
             .build()
             .create(ApiMusic::class.java)
