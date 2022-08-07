@@ -94,7 +94,8 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:src="@drawable/ic_add"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/imageAddImage"

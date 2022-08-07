@@ -1,5 +1,6 @@
 package com.quizapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -18,24 +19,13 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
 
-    // TODO (STEP 3: Create a variable for getting the name from intent.)
-    // START
     private var mUserName: String? = null
-    // END
 
-    /**
-     * This function is auto created by Android when the Activity Class is created.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
-        //This call the parent constructor
         super.onCreate(savedInstanceState)
-        // This is used to align the xml view to this class
         setContentView(R.layout.activity_quiz_questions)
 
-        // TODO (STEP 4: Get the NAME from intent and assign it the variable.)
-        // START
         mUserName = intent.getStringExtra(Constants.USER_NAME)
-        // END
 
         mQuestionsList = Constants.getQuestions()
 
@@ -48,32 +38,27 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         btn_submit.setOnClickListener(this)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onClick(v: View?) {
 
         when (v?.id) {
-
             R.id.tv_option_one -> {
-
                 selectedOptionView(tv_option_one, 1)
             }
 
             R.id.tv_option_two -> {
-
                 selectedOptionView(tv_option_two, 2)
             }
 
             R.id.tv_option_three -> {
-
                 selectedOptionView(tv_option_three, 3)
             }
 
             R.id.tv_option_four -> {
-
                 selectedOptionView(tv_option_four, 4)
             }
 
             R.id.btn_submit -> {
-
                 if (mSelectedOptionPosition == 0) {
 
                     mCurrentPosition++
@@ -81,13 +66,9 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     when {
 
                         mCurrentPosition <= mQuestionsList!!.size -> {
-
                             setQuestion()
                         }
                         else -> {
-
-                            // TODO (STEP 5: Now remove the toast message and launch the result screen which we have created and also pass the user name and score details to it.)
-                            // START
                             val intent =
                                     Intent(this@QuizQuestionsActivity, ResultActivity::class.java)
                             intent.putExtra(Constants.USER_NAME, mUserName)
@@ -95,7 +76,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                             intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
                             startActivity(intent)
                             finish()
-                            // END
                         }
                     }
                 } else {
@@ -109,7 +89,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         mCorrectAnswers++
                     }
 
-                    // This is for correct answer
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
 
                     if (mCurrentPosition == mQuestionsList!!.size) {
@@ -124,12 +103,11 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * A function for setting the question to UI components.
-     */
+
+    @SuppressLint("SetTextI18n")
     private fun setQuestion() {
 
-        val question = mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
+        val question = mQuestionsList!!.get(mCurrentPosition - 1)
 
         defaultOptionsView()
 
@@ -150,9 +128,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tv_option_four.text = question.optionFour
     }
 
-    /**
-     * A function to set the view of selected option view.
-     */
     private fun selectedOptionView(tv: TextView, selectedOptionNum: Int) {
 
         defaultOptionsView()
@@ -169,11 +144,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
-    /**
-     * A function to set default options view when the new question is loaded or when the answer is reselected.
-     */
     private fun defaultOptionsView() {
-
         val options = ArrayList<TextView>()
         options.add(0, tv_option_one)
         options.add(1, tv_option_two)
@@ -190,31 +161,30 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * A function for answer view which is used to highlight the answer is wrong or right.
-     */
     private fun answerView(answer: Int, drawableView: Int) {
 
         when (answer) {
-
             1 -> {
                 tv_option_one.background = ContextCompat.getDrawable(
                         this@QuizQuestionsActivity,
                         drawableView
                 )
             }
+
             2 -> {
                 tv_option_two.background = ContextCompat.getDrawable(
                         this@QuizQuestionsActivity,
                         drawableView
                 )
             }
+
             3 -> {
                 tv_option_three.background = ContextCompat.getDrawable(
                         this@QuizQuestionsActivity,
                         drawableView
                 )
             }
+
             4 -> {
                 tv_option_four.background = ContextCompat.getDrawable(
                         this@QuizQuestionsActivity,
