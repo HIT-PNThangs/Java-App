@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="tvShow"
             type="com.example.pnt.android.tvshows.models.TVShow" />
@@ -103,5 +104,18 @@
             app:layout_constraintEnd_toEndOf="@id/textStarted"
             app:layout_constraintStart_toStartOf="@id/textStarted"
             app:layout_constraintTop_toBottomOf="@id/textStarted" />
+
+        <ImageView
+            android:id="@+id/imageDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_delete"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@android:color/holo_red_light" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

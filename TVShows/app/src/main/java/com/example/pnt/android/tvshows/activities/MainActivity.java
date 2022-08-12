@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pnt.android.tvshows.adapters.TVShowsAdapter;
 import com.example.pnt.android.tvshows.databinding.ActivityMainBinding;
-import com.example.pnt.android.tvshows.listeners.TVShowsListener;
 import com.example.pnt.android.tvshows.models.TVShow;
 import com.example.pnt.android.tvshows.viewmodels.MostPopularTVShowsViewModel;
 
@@ -62,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        binding.imageWatchlist.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), WatchlistActivity.class));
+        });
+
+        binding.imageSearch.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+        });
+
 
         getMostPopularTVShows();
     }

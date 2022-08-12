@@ -27,6 +27,7 @@ import com.example.pnt.android.tvshows.adapters.ImageSliderAdapter;
 import com.example.pnt.android.tvshows.databinding.ActivityTvshowDetailsBinding;
 import com.example.pnt.android.tvshows.databinding.LayoutEpisodesBottomSheetBinding;
 import com.example.pnt.android.tvshows.models.TVShow;
+import com.example.pnt.android.tvshows.utilities.TempDataHolder;
 import com.example.pnt.android.tvshows.viewmodels.TVShowDetailsViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -44,6 +45,7 @@ public class TVShowDetailsActivity extends AppCompatActivity {
     private LayoutEpisodesBottomSheetBinding layoutEpisodesBottomSheetBinding;
 
     private TVShow tvShow;
+    private Boolean isTVShowAvailableInWatchlist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,24 @@ public class TVShowDetailsActivity extends AppCompatActivity {
 
         tvShow = (TVShow) getIntent().getSerializableExtra("tvShow");
 
+        checkTVShowInWatchlist();
+
         getShowTVDetail();
+    }
+
+    private void checkTVShowInWatchlist() {
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+        compositeDisposable.add(
+                tvShowDetailsViewModel.getTVShowFromWatchlist(String.valueOf(tvShow.getId())).
+                        subscribeOn(Schedulers.computation()).
+                        observeOn(AndroidSchedulers.mainThread()).
+                        subscribe(tvShow -> {
+                            isTVShowAvailableInWatchlist = false;
+                            binding.imageWatchlist.setImageResource(R.drawable.ic_check);
+                            compositeDisposable.dispose();
+                        })
+        );
     }
 
     @SuppressLint("SetTextI18n")
@@ -169,13 +188,31 @@ public class TVShowDetailsActivity extends AppCompatActivity {
                 });
 
                 binding.imageWatchlist.setOnClickListener(v1 -> {
-                    new CompositeDisposable().add(tvShowDetailsViewModel.addToWatchlist(tvShow)
-                            .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(() -> {
-                                binding.imageWatchlist.setImageResource(R.drawable.ic_check);
-                                Toast.makeText(getApplicationContext(), "Added to Watchlist", Toast.LENGTH_LONG).show();
-                            })
-                    );
+                    CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+                    if (isTVShowAvailableInWatchlist) {
+                        compositeDisposable.add(tvShowDetailsViewModel.removeTVShowFromWatchlist(tvShow).
+                                subscribeOn(Schedulers.computation()).
+                                observeOn(AndroidSchedulers.mainThread()).
+                                subscribe(() -> {
+                                    isTVShowAvailableInWatchlist = false;
+                                    TempDataHolder.IS_WATCHLIST_UPDATE = true;
+                                    binding.imageWatchlist.setImageResource(R.drawable.ic_watchlist);
+                                    Toast.makeText(getApplicationContext(), "Remove from watchlist", Toast.LENGTH_LONG).show();
+                                    compositeDisposable.dispose();
+                                })
+                        );
+                    } else {
+                        compositeDisposable.add(tvShowDetailsViewModel.addToWatchlist(tvShow)
+                                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(() -> {
+                                    TempDataHolder.IS_WATCHLIST_UPDATE = true;
+                                    binding.imageWatchlist.setImageResource(R.drawable.ic_check);
+                                    Toast.makeText(getApplicationContext(), "Added to watchlist", Toast.LENGTH_LONG).show();
+                                    compositeDisposable.dispose();
+                                })
+                        );
+                    }
                 });
 
                 binding.imageWatchlist.setVisibility(View.VISIBLE);

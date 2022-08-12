@@ -12,20 +12,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MostPopularTVShowsRepository {
+public class SearchTVShowRepository {
     private ApiService apiService;
 
-    public MostPopularTVShowsRepository() {
+    public SearchTVShowRepository() {
         apiService = ApiClient.getRetrofit().create(ApiService.class);
     }
 
-    public LiveData<TVShowsResponse> getMostPopularTVShows(int page) {
+    public LiveData<TVShowsResponse> searchTVShow(String query, int page) {
         MutableLiveData<TVShowsResponse> data = new MutableLiveData<>();
 
-        apiService.getMostPopularTVShows(page).enqueue(new Callback<TVShowsResponse>() {
+        apiService.searchTVShow(query, page).enqueue(new Callback<TVShowsResponse>() {
             @Override
             public void onResponse(@NonNull Call<TVShowsResponse> call, @NonNull Response<TVShowsResponse> response) {
-                System.out.println("Most popular: " + response.code());
+                System.out.println("Search: " + response.code());
 
                 if (response.isSuccessful()) {
                     data.setValue(response.body());
