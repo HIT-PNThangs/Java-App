@@ -25,8 +25,6 @@ public class TVShowDetailsRepository {
         apiService.getTVShowDetails(tvShowId).enqueue(new Callback<TVShowDetailsResponse>() {
             @Override
             public void onResponse(@NonNull Call<TVShowDetailsResponse> call, @NonNull Response<TVShowDetailsResponse> response) {
-                System.out.println("TV Show Detail: " + response.code());
-
                 if (response.isSuccessful()) {
                     data.setValue(response.body());
                 }
@@ -35,6 +33,7 @@ public class TVShowDetailsRepository {
             @Override
             public void onFailure(@NonNull Call<TVShowDetailsResponse> call, @NonNull Throwable t) {
                 data.setValue(null);
+                System.out.println("TV Show Detail Error: " + t.getMessage());
             }
         });
 

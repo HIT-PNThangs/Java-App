@@ -43,12 +43,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TVShowsAdapter(tvShows, tvShow -> {
             Intent intent = new Intent(getApplicationContext(), TVShowDetailsActivity.class);
 
-            intent.putExtra("id", tvShow.getId());
-            intent.putExtra("name", tvShow.getName());
-            intent.putExtra("startDate", tvShow.getStartDate());
-            intent.putExtra("country", tvShow.getCountry());
-            intent.putExtra("network", tvShow.getNetwork());
-            intent.putExtra("status", tvShow.getStatus());
+            intent.putExtra("tvShow", tvShow);
 
             startActivity(intent);
         });

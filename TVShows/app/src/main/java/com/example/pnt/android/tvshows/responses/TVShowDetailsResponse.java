@@ -4,7 +4,7 @@ import com.example.pnt.android.tvshows.models.TVShowDetails;
 import com.google.gson.annotations.SerializedName;
 
 public class TVShowDetailsResponse {
-    @SerializedName("tvShows")
+    @SerializedName("tvShow")
     private TVShowDetails tvShowDetails;
 
     public TVShowDetailsResponse() {

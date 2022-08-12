@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android-App/TVShows/app/src/main/res/drawable/background_back_button.xml" value="0.1" />
+        <entry key="..\:/Android-App/TVShows/app/src/main/res/drawable/background_fab.xml" value="0.1" />
         <entry key="..\:/Android-App/TVShows/app/src/main/res/drawable/background_fading_edge.xml" value="0.1" />
+        <entry key="..\:/Android-App/TVShows/app/src/main/res/drawable/background_slider_indicator_active.xml" value="0.1" />
+        <entry key="..\:/Android-App/TVShows/app/src/main/res/drawable/background_slider_indicator_inactive.xml" value="0.1" />
         <entry key="..\:/Android-App/TVShows/app/src/main/res/drawable/background_tv_show.xml" value="0.1525" />
         <entry key="..\:/Android-App/TVShows/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Android-App/TVShows/app/src/main/res/layout/activity_tvshow_details.xml" value="0.1337386018237082" />
+        <entry key="..\:/Android-App/TVShows/app/src/main/res/layout/activity_tvshow_details.xml" value="0.264" />
         <entry key="..\:/Android-App/TVShows/app/src/main/res/layout/item_comtainer_tv_show.xml" value="0.275" />
+        <entry key="..\:/Android-App/TVShows/app/src/main/res/layout/item_container_episode.xml" value="0.275" />
         <entry key="..\:/Android-App/TVShows/app/src/main/res/layout/item_container_slider_image.xml" value="0.264" />
+        <entry key="..\:/Android-App/TVShows/app/src/main/res/layout/layout_episodes_bottom_sheet.xml" value="0.264" />
       </map>
     </option>
   </component>

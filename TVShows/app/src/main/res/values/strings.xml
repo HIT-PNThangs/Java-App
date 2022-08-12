@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TV Shows</string>
+    <string name="website">Website</string>
+    <string name="episodes">Episodes</string>
 </resources>
