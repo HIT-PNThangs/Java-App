@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Welcome"
+                android:text="@string/welcome"
                 android:textColor="#363A43"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -54,7 +54,8 @@
                 android:layout_marginTop="16dp"
                 android:text="Please enter your name."
                 android:textColor="#7A8089"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_name"
@@ -71,7 +72,8 @@
                     android:hint="Name"
                     android:inputType="textCapWords"
                     android:textColor="#363A43"
-                    android:textColorHint="#7A8089" />
+                    android:textColorHint="#7A8089"
+                    tools:ignore="HardcodedText" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -82,7 +84,8 @@
                 android:background="@color/colorPrimary"
                 android:text="Start"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

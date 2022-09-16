@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:contentDescription="image"
-            tools:src="@drawable/ic_flag_of_germany" />
+            tools:src="@drawable/ic_flag_of_germany"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:id="@+id/ll_progress_details"
@@ -69,7 +70,7 @@
             android:background="@drawable/default_option_border_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#7A8089"
+            android:textColor="#757575"
             android:textSize="18sp"
             tools:text="Apple" />
 
@@ -84,7 +85,7 @@
             android:background="@drawable/default_option_border_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#7A8089"
+            android:textColor="#757575"
             android:textSize="18sp"
             tools:text="Google" />
 
@@ -99,7 +100,7 @@
             android:background="@drawable/default_option_border_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#7A8089"
+            android:textColor="#757575"
             android:textSize="18sp"
             tools:text="Android Inc." />
 
@@ -114,7 +115,7 @@
             android:background="@drawable/default_option_border_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#7A8089"
+            android:textColor="#757575"
             android:textSize="18sp"
             tools:text="Nokia" />
 
@@ -124,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/colorPrimary"
-            android:text="SUBMIT"
+            android:text="@string/submit"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />

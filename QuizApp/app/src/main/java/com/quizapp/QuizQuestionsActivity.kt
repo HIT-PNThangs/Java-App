@@ -64,7 +64,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     mCurrentPosition++
 
                     when {
-
                         mCurrentPosition <= mQuestionsList!!.size -> {
                             setQuestion()
                         }
@@ -102,7 +101,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun setQuestion() {
