@@ -416,13 +416,13 @@ public class CreateNoteActivity extends AppCompatActivity {
         }
     }
 
-    private String getPathFromUri(Uri contenUri) {
+    private String getPathFromUri(Uri contentUri) {
         String filePath;
         Cursor cursor = getContentResolver()
-                .query(contenUri, null, null, null, null);
+                .query(contentUri, null, null, null, null);
 
         if (cursor == null) {
-            filePath = contenUri.getPath();
+            filePath = contentUri.getPath();
         } else {
             cursor.moveToFirst();
 
